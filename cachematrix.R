@@ -1,19 +1,30 @@
-## Put comments here that give an overall description of what your
-## functions do
+## These functions are written for completion of Programming Assignment 2: Lexical Scoping
 
-## This function creates a special "matrix" object that can cache its inverse.
 
+## This function, makeCacheMatrix, creates a special "matrix" object that can cache its inverse.
 makeCacheMatrix <- function(x = matrix()) {
+    inv_m <- NULL                         ## Create inv_m as NULL to hold the inverse matrix            
     
     m <- x$getmean()
-    if(!is.null(m)) {
-      message("getting cached data")
-      return(m)
+    ## Define the set function to assign the value of the matrix in parent environment
+    set <- function(y) {                  
+      x <<- y                             ## Assign the new matrix value in parent environment  
+      inv_m <<- NULL                      ## reset the value of inverse matrix, inv_m to NULL
     }
-    data <- x$get()
-    m <- mean(data, ...)
-    x$setmean(m)
-    m
+    
+    ## Define the get function to retrieve the matrix
+    get <- function() x                   
+    
+    ## Define the setInverse function to set the matrix value in parent environment
+    setInverse <- function(inverse) inv_m <<- inservse  
+                                                        
+    ## Define the getInverse function to retrieve the local inverse matrix value, inv_m
+    getInverse <- function() inv_m                      
+    
+    ## Create a list to access the functions 
+    list(set = set, get = get,
+         setInverse = setInverse,
+         getInverse = getInverse)
 }
 
 
